@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="77c70fac-6b20-40f5-98a0-d08e490457d2">
+		<http:listener-connection host="localhost" port="${http.private.port}" usePersistentConnections="false"/>
+	</http:listener-config>
+	<configuration-properties doc:name="Configuration properties" doc:id="6a0d1cf2-efea-4e69-aa84-0667af640a2e" file="${env}.properties" />
+	<global-property doc:name="Global Property" doc:id="b92eafd4-52db-43a8-a625-8a818dcaef56" name="env" value="{env}" />
+	<flow name="helloFlow" doc:id="26f34132-2965-46bd-bed7-21d883a3aa07" >
+		<http:listener doc:name="Listener" doc:id="e757fecc-0599-4d1d-a3a9-ab589935dd05" config-ref="HTTP_Listener_config" path="/helo"/>
+		<ee:transform doc:name="Transform Message" doc:id="4ec14f5c-11d4-4e80-ab2e-ea9d9a3be429" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+
+
+---
+{
+	users: payload.users map (user, indexofuser)-> {
+	
+			
+			Name:user.firstName ++ user.lastName
+		
+		
+	    
+	} 
+	
+}
+ ]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="5e83496a-ed99-4d30-ac2d-3b237e4ddfd4" message="#[payload]"/>
+	</flow>
+</mule>

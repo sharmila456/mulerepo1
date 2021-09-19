@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<types:mule xmlns:types="http://www.mulesoft.org/schema/mule/types">
+  <types:catalog>
+    <types:type name="UserDetails" format="json">
+      <types:shape format="weave" example="examples/UserDetails.json"><![CDATA[%dw 2.0
+
+type UserDetails = {|
+  users: Array<{|    userId: Number {"typeId": "int"},     firstName: String,     lastName: String,     phoneNumber: String,     emailAddress: String  |}>
+|} {"example": "{\\\"users\\\":[{\\\"userId\\\":1,\\\"firstName\\\":\\\"Krish\\\",\\\"lastName\\\":\\\"Lee\\\",\\\"phoneNumber\\\":\\\"123456\\\",\\\"emailAddress\\\":\\\"krish.lee@learningcontainer.com\\\"},{\\\"userId\\\":2,\\\"firstName\\\":\\\"racks\\\",\\\"lastName\\\":\\\"jacson\\\",\\\"phoneNumber\\\":\\\"123456\\\",\\\"emailAddress\\\":\\\"racks.jacson@learningcontainer.com\\\"},{\\\"userId\\\":3,\\\"firstName\\\":\\\"denial\\\",\\\"lastName\\\":\\\"roast\\\",\\\"phoneNumber\\\":\\\"33333333\\\",\\\"emailAddress\\\":\\\"denial.roast@learningcontainer.com\\\"},{\\\"userId\\\":4,\\\"firstName\\\":\\\"devid\\\",\\\"lastName\\\":\\\"neo\\\",\\\"phoneNumber\\\":\\\"222222222\\\",\\\"emailAddress\\\":\\\"devid.neo@learningcontainer.com\\\"},{\\\"userId\\\":5,\\\"firstName\\\":\\\"jone\\\",\\\"lastName\\\":\\\"mac\\\",\\\"phoneNumber\\\":\\\"111111111\\\",\\\"emailAddress\\\":\\\"jone.mac@learningcontainer.com\\\"}]}"}
+
+]]></types:shape>
+    </types:type>
+    <types:type name="ex" format="json">
+      <types:shape format="weave" example="examples/UserDetails-1.json"><![CDATA[%dw 2.0
+
+type ex = {|
+  users: Array<{|    userId: Number {"typeId": "int"},     firstName: String,     lastName: String,     phoneNumber: String,     emailAddress: String  |}>
+|} {"example": "{\\\"users\\\":[{\\\"userId\\\":1,\\\"firstName\\\":\\\"Krish\\\",\\\"lastName\\\":\\\"Lee\\\",\\\"phoneNumber\\\":\\\"123456\\\",\\\"emailAddress\\\":\\\"krish.lee@learningcontainer.com\\\"},{\\\"userId\\\":2,\\\"firstName\\\":\\\"racks\\\",\\\"lastName\\\":\\\"jacson\\\",\\\"phoneNumber\\\":\\\"123456\\\",\\\"emailAddress\\\":\\\"racks.jacson@learningcontainer.com\\\"},{\\\"userId\\\":3,\\\"firstName\\\":\\\"denial\\\",\\\"lastName\\\":\\\"roast\\\",\\\"phoneNumber\\\":\\\"33333333\\\",\\\"emailAddress\\\":\\\"denial.roast@learningcontainer.com\\\"},{\\\"userId\\\":4,\\\"firstName\\\":\\\"devid\\\",\\\"lastName\\\":\\\"neo\\\",\\\"phoneNumber\\\":\\\"222222222\\\",\\\"emailAddress\\\":\\\"devid.neo@learningcontainer.com\\\"},{\\\"userId\\\":5,\\\"firstName\\\":\\\"jone\\\",\\\"lastName\\\":\\\"mac\\\",\\\"phoneNumber\\\":\\\"111111111\\\",\\\"emailAddress\\\":\\\"jone.mac@learningcontainer.com\\\"}]}"}
+
+]]></types:shape>
+    </types:type>
+  </types:catalog>
+  <types:enrichment select="#4ec14f5c-11d4-4e80-ab2e-ea9d9a3be429">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="UserDetails"/>
+        </types:message>
+      </types:input-event>
+      <types:output-event>
+        <types:message>
+          <types:payload type="ex"/>
+        </types:message>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+</types:mule>
