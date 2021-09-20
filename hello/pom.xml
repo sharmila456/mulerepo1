@@ -37,6 +37,7 @@
       <password>${password}</password>
       <applicationName>${cloudhub.application.name}</applicationName>
       <environment>${env}</environment>
+      <objectStoreV2>true</objectStoreV2>
       <workerType>${vCore}</workerType>
       <workers>${workers}</workers>
     </cloudHubDeployment>
