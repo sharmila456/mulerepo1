@@ -36,7 +36,7 @@
       <username>${username}</username>
       <password>${password}</password>
       <applicationName>${cloudhub.application.name}</applicationName>
-      <environment>${env}</environment>x	xxx
+      <environment>${env}</environment>
       <workerType>${vCore}</workerType>
       <workers>${workers}</workers>
     </cloudHubDeployment>
